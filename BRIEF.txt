@@ -1,0 +1,91 @@
+BRIEF - Bitcoin Murcia Landing Page
+=====================================
+
+PROYECTO
+--------
+Landing page para Bitcoin Murcia - Academia online de blockchain/cripto
+Objetivo: Reactivar academia con landing moderna, minimal, tecnológica
+
+ESTADO ACTUAL
+-------------
+- Web actual: bitcoinmurcia.com (WordPress en IONOS)
+- Curso: Udemy "Introducción a Bitcoin" - 24.99€
+- Lead magnets: Ebook gratuito + Guía de herramientas de seguridad
+- Target: Murcia → Hispanohablante global
+
+BUYER PERSONA: PABLO MARTINEZ
+------------------------------
+- Edad: 34 años (rango 25-45)
+- Profesión: Diseñador gráfico freelance
+- Ingresos: Medios (1,800€/mes)
+- Ubicación: Madrid (ejemplo), target Murcia primero
+
+Dolores:
+- Falta de claridad
+- Miedo a errores
+- Poco tiempo
+- Contenido desactualizado
+
+Motivaciones:
+- Diversificar ingresos
+- Crear NFTs
+- Libertad financiera
+
+Nivel: Principiante que busca claridad práctica
+
+PILARES FUNDAMENTALES
+---------------------
+1. Individualidad: Enseñanza accesible, contenido actualizado, comunidad activa
+2. Beneficios: Aprender desde cero con claridad, conocimientos prácticos, comunidad innovadora
+3. Motivaciones: Pasión por cripto, pertenencia, empoderamiento financiero
+4. Lo que quiere: Formación clara/práctica, contenido actualizado, apoyo personalizado
+5. Verbos de acción: Aprender, Conectar, Transformar
+
+SLOGAN
+------
+"Tu Escuela de Bitcoin"
+
+Personal, cercano, diferenciador. Complementa el nombre sin repetir "Murcia".
+
+ESTRUCTURA LANDING
+------------------
+1. Hero: "Tu Escuela de Bitcoin" + CTAs (Empieza gratis / Ver curso)
+2. Problem: 3 dolores principales (técnico, miedo, no saber por dónde empezar)
+3. Solution: Propuesta de valor
+4. Ebook: Lead magnet gratuito
+5. Curso: Producto principal
+6. Instructor: Credibilidad
+7. Guía: Segundo lead magnet
+8. FAQ: Preguntas frecuentes
+9. CTA Final: Conversión
+10. Footer: Links y contacto
+
+TONO Y ESTILO
+-------------
+- Serio pero accesible
+- Tecnológico pero humano
+- "De Murcia al mundo" - local con proyección global
+- Diferenciador: Soberanía financiera, no especulación
+- No "cripto-bro", no promesas de hacerse rico
+
+TECH STACK
+----------
+- Framework: Astro + React islands
+- Estilos: Tailwind CSS
+- Animaciones: GSAP + ScrollTrigger
+- CMS: MDX/Content Collections
+- Email: Listmonk (migrar desde MailerLite)
+- Hosting: Vercel
+
+RECURSOS DISPONIBLES
+--------------------
+- Logo Bitcoin Murcia (varios formatos)
+- Foto Cristian speaker
+- Testimonios (test1.jpg, test2.jpg, test3.jpg)
+- Imágenes de marca
+
+NOTAS ADICIONALES
+-----------------
+- Popups actuales son de MailerLite (ebook + guía seguridad)
+- Migrar a Listmonk para unificar con FoxLabs
+- Enfoque en educación, no inversión especulativa
