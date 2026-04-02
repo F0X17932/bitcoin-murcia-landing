@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bitcoin Murcia</title>
+<style>
+:root{--bitcoin-orange:#F7931A;--bitcoin-orange-light:#FFAD33;--bg-dark:#0D0D0D;--bg-card:#1A1A1A;--text-primary:#FFFFFF;--text-secondary:#A0A0A0;--text-muted:#666666;--border:#2A2A2A}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg-dark);color:var(--text-primary);line-height:1.6;overflow-x:hidden}
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(13,13,13,0.8);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:0.75rem;font-weight:700;font-size:1.25rem;color:var(--text-primary);text-decoration:none}
+.nav-logo svg{width:32px;height:32px}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--text-secondary);text-decoration:none;font-weight:500;font-size:0.9rem;transition:color 0.3s ease}
+.nav-links a:hover{color:var(--bitcoin-orange)}
+.nav-cta{background:var(--bitcoin-orange);color:var(--bg-dark);padding:0.75rem 1.5rem;border-radius:8px;font-weight:600;font-size:0.9rem;text-decoration:none;transition:all 0.3s ease}
+.nav-cta:hover{background:var(--bitcoin-orange-light);transform:translateY(-2px)}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:8rem 2rem 4rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(247,147,26,0.15),transparent),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(247,147,26,0.08),transparent);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(247,147,26,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(247,147,26,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero-content{max-width:900px;text-align:center;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(247,147,26,0.1);border:1px solid rgba(247,147,26,0.3);padding:0.5rem 1rem;border-radius:100px;font-size:0.875rem;color:var(--bitcoin-orange);margin-bottom:2rem}
+.hero-badge::before{content:'';width:8px;height:8px;background:var(--bitcoin-orange);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.2)}}
+.hero-title{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;line-height:1.1;margin-bottom:1.5rem;letter-spacing:-0.02em}
+.hero-title span{color:var(--bitcoin-orange)}
+.hero-subtitle{font-size:clamp(1.1rem,2vw,1.35rem);color:var(--text-secondary);max-width:600px;margin:0 auto 2.5rem;line-height:1.7}
+.hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--bitcoin-orange);color:var(--bg-dark);padding:1rem 2rem;border-radius:12px;font-weight:600;font-size:1rem;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.3s ease;border:none;cursor:pointer}
+.btn-primary:hover{background:var(--bitcoin-orange-light);transform:translateY(-3px);box-shadow:0 20px 40px rgba(247,147,26,0.3)}
+.btn-secondary{background:transparent;color:var(--text-primary);padding:1rem 2rem;border-radius:12px;font-weight:600;font-size:1rem;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;border:1px solid var(--border);transition:all 0.3s ease}
+.btn-secondary:hover{background:var(--bg-card);border-color:var(--bitcoin-orange)}
+.hero-stats{display:flex;justify-content:center;gap:4rem;margin-top:4rem;padding-top:3rem;border-top:1px solid var(--border)}
+.stat{text-align:center}
+.stat-value{font-size:2.5rem;font-weight:800;color:var(--bitcoin-orange);display:block}
+.stat-label{font-size:0.875rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.1em}
+section{padding:6rem 2rem}
+.container{max-width:1200px;margin:0 auto}
+.section-header{text-align:center;max-width:700px;margin:0 auto 4rem}
+.section-tag{display:inline-block;background:rgba(247,147,26,0.1);color:var(--bitcoin-orange);padding:0.4rem 1rem;border-radius:100px;font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem}
+.section-title{font-size:clamp(2rem,4vw,3rem);font-weight:700;margin-bottom:1rem;line-height:1.2}
+.section-subtitle{color:var(--text-secondary);font-size:1.1rem}
+.problem{background:var(--bg-card)}
+.problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+.problem-card{background:var(--bg-dark);padding:2rem;border-radius:16px;border:1px solid var(--border);transition:all 0.3s ease}
+.problem-card:hover{border-color:var(--bitcoin-orange);transform:translateY(-5px)}
+.problem-icon{width:56px;height:56px;background:rgba(247,147,26,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;font-size:1.5rem}
+.problem-card h3{font-size:1.25rem;margin-bottom:0.75rem}
+.problem-card p{color:var(--text-secondary);font-size:0.95rem}
+.solution-content{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.solution-text h2{font-size:2.5rem;font-weight:700;margin-bottom:1.5rem;line-height:1.2}
+.solution-text h2 span{color:var(--bitcoin-orange)}
+.solution-text p{color:var(--text-secondary);font-size:1.1rem;margin-bottom:1.5rem}
+.solution-list{list-style:none}
+.solution-list li{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;color:var(--text-primary)}
+.solution-list li::before{content:'✓';width:24px;height:24px;background:var(--bitcoin-orange);color:var(--bg-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;flex-shrink:0}
+.solution-visual{position:relative}
+.solution-card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:2rem;position:relative;overflow:hidden}
+.solution-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--bitcoin-orange),var(--bitcoin-orange-light))}
+.bitcoin-icon{width:80px;height:80px;background:var(--bitcoin-orange);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;font-size:2.5rem;font-weight:700;color:var(--bg-dark)}
+.features{background:var(--bg-card)}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.feature-card{background:var(--bg-dark);padding:2rem;border-radius:16px;border:1px solid var(--border);transition:all 0.3s ease}
+.feature-card:hover{border-color:var(--bitcoin-orange);transform:translateY(-5px)}
+.feature-icon{width:48px;height:48px;background:rgba(247,147,26,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;font-size:1.25rem}
+.feature-card h3{font-size:1.1rem;margin-bottom:0.5rem}
+.feature-card p{color:var(--text-secondary);font-size:0.9rem}
+.meetups-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:2rem}
+.meetup-card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all 0.3s ease}
+.meetup-card:hover{border-color:var(--bitcoin-orange);transform:translateY(-5px)}
+.meetup-header{padding:1.5rem;background:linear-gradient(135deg,rgba(247,147,26,0.1),transparent);border-bottom:1px solid var(--border)}
+.meetup-type{display:inline-block;background:var(--bitcoin-orange);color:var(--bg-dark);padding:0.25rem 0.75rem;border-radius:100px;font-size:0.75rem;font-weight:600;text-transform:uppercase;margin-bottom:0.75rem}
+.meetup-card h3{font-size:1.25rem}
+.meetup-body{padding:1.5rem}
+.meetup-detail{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;color:var(--text-secondary);font-size:0.9rem}
+.meetup-detail svg{width:18px;height:18px;color:var(--bitcoin-orange);flex-shrink:0}
+.meetup-footer{padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.meetup-spots{font-size:0.875rem;color:var(--text-secondary)}
+.meetup-spots span{color:var(--bitcoin-orange);font-weight:600}
+.cta{background:linear-gradient(135deg,rgba(247,147,26,0.1),transparent);position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 50% 30% at 50% 100%,rgba(247,147,26,0.1),transparent);pointer-events:none}
+.cta-content{text-align:center;max-width:700px;margin:0 auto;position:relative;z-index:1}
+.cta h2{font-size:clamp(2rem,4vw,3rem);font-weight:700;margin-bottom:1rem}
+.cta h2 span{color:var(--bitcoin-orange)}
+.cta p{color:var(--text-secondary);font-size:1.1rem;margin-bottom:2rem}
+.cta-form{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto}
+.cta-form input{flex:1;min-width:250px;padding:1rem 1.25rem;border-radius:12px;border:1px solid var(--border);background:var(--bg-dark);color:var(--text-primary);font-size:1rem;outline:none;transition:border-color 0.3s ease}
+.cta-form input:focus{border-color:var(--bitcoin-orange)}
+.cta-form input::placeholder{color:var(--text-muted)}
+.footer{background:var(--bg-dark);border-top:1px solid var(--border);padding:4rem 2rem 2rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-brand p{color:var(--text-secondary);margin-top:1rem;font-size:0.95rem}
+.footer-links h4{font-size:0.9rem;font-weight:600;margin-bottom:1rem;color:var(--text-primary)}
+.footer-links ul{list-style:none}
+.footer-links li{margin-bottom:0.5rem}
+.footer-links a{color:var(--text-secondary);text-decoration:none;font-size:0.9rem;transition:color 0.3s ease}
+.footer-links a:hover{color:var(--bitcoin-orange)}
+.footer-bottom{padding-top:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-bottom p{color:var(--text-muted);font-size:0.875rem}
+.footer-social{display:flex;gap:1rem}
+.footer-social a{width:40px;height:40px;background:var(--bg-card);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);text-decoration:none;transition:all 0.3s ease}
+.footer-social a:hover{background:var(--bitcoin-orange);color:var(--bg-dark)}
+.mobile-menu-btn{display:none;background:none;border:none;color:var(--text-primary);cursor:pointer}
+@media(max-width:1024px){.solution-content{grid-template-columns:1fr;gap:3rem}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.nav-links,.nav-cta{display:none}.mobile-menu-btn{display:block}.hero-stats{gap:2rem}.stat-value{font-size:1.75rem}.footer-grid{grid-template-columns:1fr;gap:2rem}.footer-bottom{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+<nav class="nav">
+<a href="#" class="nav-logo">
+<svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#F7931A"/><path d="M22.7 14.3c0.4-2.6-1.6-4-4.3-4.9l0.9-3.5-2.1-0.5-0.8 3.4c-0.6-0.1-1.1-0.3-1.7-0.4l0.8-3.4-2.1-0.5-0.9 3.5c-0.5-0.1-0.9-0.3-1.4-0.4l0-0-2.9-0.7-0.6 2.4s1.6 0.4 1.5 0.4c0.9 0.2 1 0.7 1 1.2l-1 4c0.1 0 0.2 0 0.3 0.1l-0.3-0.1-1.4 5.6c-0.1 0.3-0.4 0.7-1 0.5 0 0-1.5-0.4-1.5-0.4l-1.1 2.5 2.7 0.7c0.5 0.1 1 0.3 1.4 0.4l-0.9 3.6 2.1 0.5 0.9-3.5c0.6 0.2 1.1 0.3 1.7 0.4l-0.9 3.5 2.1 0.5 0.9-3.6c3.7 0.7 6.5-0.4 7.7-3.2 1-2.2 0-3.5-1.5-4.4 1.1-0.3 1.9-1 2.1-2.5zm-3.8 5.5c-0.7 2.7-5.1 1.2-6.6 0.9l1.2-4.7c1.5 0.4 6.2 1.1 5.4 3.8zm0.7-5.5c-0.6 2.5-4.3 1.2-5.5 1l1.1-4.4c1.2 0.3 4.9 0.9 4.4 3.4z" fill="#0D0D0D"/></svg>
+Bitcoin Murcia
+</a>
+<ul class="nav-links">
+<li><a href="#problem">El Problema</a></li>
+<li><a href="#solution">Solución</a></li>
+<li><a href="#features">Beneficios</a></li>
+<li><a href="#meetups">Meetups</a></li>
+</ul>
+<a href="#cta" class="nav-cta">Unirme ahora</a>
+<button class="mobile-menu-btn"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+</nav>
+
+<section class="hero">
+<div class="hero-bg"></div>
+<div class="hero-grid"></div>
+<div class="hero-content">
+<div class="hero-badge">Comunidad activa en Murcia</div>
+<h1 class="hero-title">El dinero del futuro,<br><span>en tu ciudad</span></h1>
+<p class="hero-subtitle">Únete a la comunidad de Bitcoin en Murcia. Aprende, conecta y crece con otros entusiastas en meetups mensuales y recursos educativos.</p>
+<div class="hero-cta">
+<a href="#cta" class="btn-primary">Quiero unirme</a>
+<a href="#meetups" class="btn-secondary">Ver próximos meetups</a>
+</div>
+<div class="hero-stats">
+<div class="stat"><span class="stat-value" data-count="500">0</span><span class="stat-label">Miembros</span></div>
+<div class="stat"><span class="stat-value" data-count="50">0</span><span class="stat-label">Meetups</span></div>
+<div class="stat"><span class="stat-value" data-count="12">0</span><span class="stat-label">Empresas</span></div>
+</div>
+</div>
+</section>
+
+<section id="problem" class="problem">
+<div class="container">
+<div class="section-header">
+<span class="section-tag">El Problema</span>
+<h2 class="section-title">¿Por qué cuesta tanto entender Bitcoin?</h2>
+<p class="section-subtitle">Muchos quieren aprender, pero se enfrentan a obstáculos que frenan su progreso.</p>
+</div>
+<div class="problem-grid">
+<div class="problem-card">
+<div class="problem-icon">📚</div>
+<h3>Información dispersa</h3>
+<p>Demasiadas fuentes contradictorias. No sabes por dónde empezar ni quién tiene razón.</p>
+</div>
+<div class="problem-card">
+<div class="problem-icon">😰</div>
+<h3>Miedo a preguntar</h3>
+<p>Los foros online pueden ser intimidantes. Nadie quiere parecer "novato" o recibir respuestas tóxicas.</p>
+</div>
+<div class="problem-card">
+<div class="problem-icon">🏝️</div>
+<h3>Falta de comunidad local</h3>
+<p>Internet está lleno de grupos, pero nada sustituye el contacto cara a cara con gente de tu ciudad.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="solution" class="solution">
+<div class="container">
+<div class="solution-content">
+<div class="solution-text">
+<span class="section-tag">Nuestra Solución</span>
+<h2>Un espacio <span>seguro</span> para aprender y conectar</h2>
+<p>Bitcoin Murcia nace para acercar esta tecnología a todo el mundo. Sin tecnicismos innecesarios, sin actitud tóxica.</p>
+<p>Creamos un ambiente donde los newcomers pueden hacer preguntas sin miedo y los expertos pueden compartir su conocimiento.</p>
+<ul class="solution-list">
+<li>Meetups mensuales presenciales</li>
+<li>Contenido educativo en español</li>
+<li>Networking con profesionales</li>
+<li>Apoyo para empresas y autónomos</li>
+</ul>
+</div>
+<div class="solution-visual">
+<div class="solution-card">
+<div class="bitcoin-icon">₿</div>
+<h3>La revolución está en Murcia</h3>
+<p style="color:var(--text-secondary);margin-bottom:1.5rem">No necesitas ser experto. Solo tener curiosidad y ganas de aprender.</p>
+<div style="display:flex;gap:1rem;flex-wrap:wrap">
+<span style="background:rgba(247,147,26,0.1);color:var(--bitcoin-orange);padding:0.5rem 1rem;border-radius:100px;font-size:0.875rem">#BitcoinOnly</span>
+<span style="background:rgba(247,147,26,0.1);color:var(--bitcoin-orange);padding:0.5rem 1rem;border-radius:100px;font-size:0.875rem">#Murcia</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="features" class="features">
+<div class="container">
+<div class="section-header">
+<span class="section-tag">Beneficios</span>
+<h2 class="section-title">¿Qué ofrecemos?</h2>
+<p class="section-subtitle">Recursos y oportunidades para todos los niveles de conocimiento.</p>
+</div>
+<div class="features-grid">
+<div class="feature-card"><div class="feature-icon">🎓</div><h3>Educación práctica</h3><p>Talleres y charlas para entender Bitcoin desde cero, sin tecnicismos innecesarios.</p></div>
+<div class="feature-card"><div class="feature-icon">🤝</div><h3>Networking local</h3><p>Conecta con otros entusiastas, profesionales y empresas de la Región de Murcia.</p></div>
+<div class="feature-card"><div class="feature-icon">🏢</div><h3>Adopción empresarial</h3><p>Asesoramiento para empresas que quieren integrar Bitcoin en su negocio.</p></div>
+<div class="feature-card"><div class="feature-icon">📱</div><h3>Comunidad online</h3><p>Grupo privado para resolver dudas y compartir noticias entre meetups.</p></div>
+<div class="feature-card"><div class="feature-icon">🔒</div><h3>Seguridad</h3><p>Aprende a proteger tus fondos con las mejores prácticas de custodia.</p></div>
+<div class="feature-card"><div class="feature-icon">⚡</div><h3>Lightning Network</h3><p>Descubre cómo usar Bitcoin para pagos instantáneos y de bajo coste.</p></div>
+</div>
+</div>
+</section>
+
+<section id="meetups" class="meetups">
+<div class="container">
+<div class="section-header">
+<span class="section-tag">Próximos Meetups</span>
+<h2 class="section-title">¿Cuándo nos vemos?</h2>
+<p class="section-subtitle">Eventos mensuales para aprender, compartir y conectar.</p>
+</div>
+<div class="meetups-grid">
+<div class="meetup-card">
+<div class="meetup-header">
+<span class="meetup-type">Meetup Mensual</span>
+<h3>Bitcoin 101: Primeros pasos</h3>
+</div>
+<div class="meetup-body">
+<div class="meetup-detail">📅 Jueves 15 de Mayo, 19:00</div>
+<div class="meetup-detail">📍 Coworking Murcia Centro</div>
+<div class="meetup-detail">👤 Para newcomers y curiosos</div>
+</div>
+<div class="meetup-footer">
+<span class="meetup-spots"><span>12</span> plazas disponibles</span>
+<a href="#cta" class="btn-primary" style="padding:0.5rem 1rem;font-size:0.875rem">Apuntarme</a>
+</div>
+</div>
+<div class="meetup-card">
+<div class="meetup-header">
+<span class="meetup-type">Taller Técnico</span>
+<h3>Lightning Network en práctica</h3>
+</div>
+<div class="meetup-body">
+<div class="meetup-detail">📅 Miércoles 28 de Mayo, 18:30</div>
+<div class="meetup-detail">📍 Hub Tecnológico Murcia</div>
+<div class="meetup-detail">👤 Nivel intermedio</div>
+</div>
+<div class="meetup-footer">
+<span class="meetup-spots"><span>8</span> plazas disponibles</span>
+<a href="#cta" class="btn-primary" style="padding:0.5rem 1rem;font-size:0.875rem">Apuntarme</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="cta" class="cta">
+<div class="container">
+<div class="cta-content">
+<span class="section-tag">Únete hoy</span>
+<h2>Forma parte de <span>Bitcoin Murcia</span></h2>
+<p>Déjanos tu email y te avisamos de los próximos meetups. Sin spam, solo información relevante.</p>
+<form class="cta-form" onsubmit="event.preventDefault();alert('¡Gracias por unirte! Te contactaremos pronto.');">
+<input type="email" placeholder="tu@email.com" required>
+<button type="submit" class="btn-primary">Unirme ahora</button>
+</form>
+</div>
+</div>
+</section>
+
+<footer class="footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a href="#" class="nav-logo">
+<svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#F7931A"/><path d="M22.7 14.3c0.4-2.6-1.6-4-4.3-4.9l0.9-3.5-2.1-0.5-0.8 3.4c-0.6-0.1-1.1-0.3-1.7-0.4l0.8-3.4-2.1-0.5-0.9 3.5c-0.5-0.1-0.9-0.3-1.4-0.4l0-0-2.9-0.7-0.6 2.4s1.6 0.4 1.5 0.4c0.9 0.2 1 0.7 1 1.2l-1 4c0.1 0 0.2 0 0.3 0.1l-0.3-0.1-1.4 5.6c-0.1 0.3-0.4 0.7-1 0.5 0 0-1.5-0.4-1.5-0.4l-1.1 2.5 2.7 0.7c0.5 0.1 1 0.3 1.4 0.4l-0.9 3.6 2.1 0.5 0.9-3.5c0.6 0.2 1.1 0.3 1.7 0.4l-0.9 3.5 2.1 0.5 0.9-3.6c3.7 0.7 6.5-0.4 7.7-3.2 1-2.2 0-3.5-1.5-4.4 1.1-0.3 1.9-1 2.1-2.5zm-3.8 5.5c-0.7 2.7-5.1 1.2-6.6 0.9l1.2-4.7c1.5 0.4 6.2 1.1 5.4 3.8zm0.7-5.5c-0.6 2.5-4.3 1.2-5.5 1l1.1-4.4c1.2 0.3 4.9 0.9 4.4 3.4z" fill="#0D0D0D"/></svg>
+Bitcoin Murcia
+</a>
+<p>La comunidad Bitcoin de la Región de Murcia. Educación, meetups y networking desde 2023.</p>
+</div>
+<div class="footer-links">
+<h4>Enlaces</h4>
+<ul>
+<li><a href="#problem">El Problema</a></li>
+<li><a href="#solution">Solución</a></li>
+<li><a href="#features">Beneficios</a></li>
+<li><a href="#meetups">Meetups</a></li>
+</ul>
+</div>
+<div class="footer-links">
+<h4>Recursos</h4>
+<ul>
+<li><a href="#">Blog</a></li>
+<li><a href="#">Podcast</a></li>
+<li><a href="#">Guías</a></li>
+<li><a href="#">FAQ</a></li>
+</ul>
+</div>
+<div class="footer-links">
+<h4>Legal</h4>
+<ul>
+<li><a href="#">Privacidad</a></li>
+<li><a href="#">Términos</a></li>
+<li><a href="#">Cookies</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p>2025 Bitcoin Murcia. Todos los derechos reservados.</p>
+<div class="footer-social">
+<a href="#" aria-label="Twitter">𝕏</a>
+<a href="#" aria-label="Telegram">✈</a>
+<a href="#" aria-label="Discord">💬</a>
+</div>
+</div>
+</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+gsap.from('.hero-badge',{opacity:0,y:30,duration:0.8,delay:0.2,ease:'power3.out'});
+gsap.from('.hero-title',{opacity:0,y:30,duration:0.8,delay:0.4,ease:'power3.out'});
+gsap.from('.hero-subtitle',{opacity:0,y:30,duration:0.8,delay:0.6,ease:'power3.out'});
+gsap.from('.hero-cta',{opacity:0,y:30,duration:0.8,delay:0.8,ease:'power3.out'});
+gsap.from('.stat',{opacity:0,y:30,duration:0.6,stagger:0.1,delay:1,ease:'power3.out'});
+const counters=document.querySelectorAll('.stat-value');
+counters.forEach(counter=>{
+const target=parseInt(counter.getAttribute('data-count'));
+gsap.to(counter,{innerHTML:target,duration:2,delay:1.2,ease:'power2.out',snap:{innerHTML:1},onUpdate:function(){counter.innerHTML=Math.round(this.targets()[0].innerHTML)+'+'}});
+});
+gsap.utils.toArray('.section-header').forEach(header=>{gsap.from(header,{scrollTrigger:{trigger:header,start:'top 80%'},opacity:0,y:30,duration:0.8,ease:'power3.out'})});
+gsap.utils.toArray('.problem-card').forEach((card,i)=>{gsap.from(card,{scrollTrigger:{trigger:card,start:'top 85%'},opacity:0,y:30,duration:0.6,delay:i*0.1,ease:'power3.out'})});
+gsap.from('.solution-text',{scrollTrigger:{trigger:'.solution',start:'top 70%'},opacity:0,y:30,duration:0.8,ease:'power3.out'});
+gsap.from('.solution-visual',{scrollTrigger:{trigger:'.solution',start:'top 70%'},opacity:0,y:30,duration:0.8,delay:0.2,ease:'power3.out'});
+gsap.utils.toArray('.feature-card').forEach((card,i)=>{gsap.from(card,{scrollTrigger:{trigger:card,start:'top 85%'},opacity:0,y:30,duration:0.6,delay:i*0.05,ease:'power3.out'})});
+gsap.utils.toArray('.meetup-card').forEach((card,i)=>{gsap.from(card,{scrollTrigger:{trigger:card,start:'top 85%'},opacity:0,y:30,duration:0.6,delay:i*0.1,ease:'power3.out'})});
+gsap.from('.cta-content',{scrollTrigger:{trigger:'.cta',start:'top 70%'},opacity:0,y:30,duration:0.8,ease:'power3.out'});
+</script>
+</body>
+</html>
